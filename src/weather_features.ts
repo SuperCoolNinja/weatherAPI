@@ -1,5 +1,5 @@
 import { API_KEY_WEATHER, API_KEY_CITY } from "./config.local.ts"; // --> to be : config.js
-import { fetchData } from "./cache.js"; // --> to be : config.js
+import { fetchData } from "./cache.js";
 
 // Change the background color depending on the time from city :
 const changeBackgroundFromTime = async (lat: number, lon: number) => {

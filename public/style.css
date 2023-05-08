@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    rgb(3, 11, 28) 0%,
+    rgb(27, 44, 127) 0%,
+    rgba(5, 25, 106, 0.455) 100%
+  );
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  margin: 15rem auto;
+}
+
+input {
+  border-radius: 0.7rem;
+  padding: 1rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.201);
+  margin: 1rem;
+}
+
+input[type="text"] {
+  font-size: 1.6rem;
+  border: none;
+  outline: 0.2rem solid rgba(0, 0, 0, 0.201);
+  background: #00000031;
+  color: rgba(255, 255, 255, 0.853);
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.853);
+}
+input:focus {
+  background: #0000008d;
+  color: rgb(255, 255, 255);
+}
+
+#days {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #00000031;
+  color: rgb(255, 255, 255);
+  outline: 0.2rem solid rgba(0, 0, 0, 0.201);
+  border: none;
+  margin: 1rem;
+  font-size: 1.6rem;
+}
+#days:focus {
+  background: #0000008d;
+}
+
+button {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.201);
+  color: white;
+  border: 0.1rem solid rgba(0, 0, 0, 0.201);
+  font-size: 1.6rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #0000008d;
+}
+
+#title {
+  color: white;
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+.day {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.temperature {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: bold;
+  font-size: 2.8rem;
+}
+
+#wrapper_item {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 50%;
+  gap: 2rem;
+  margin: 5rem auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+  height: 30rem;
+  aspect-ratio: 16/9;
+  padding: 2rem;
+  background: #9e9d9d43;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+.card:hover {
+  background: #15151584;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+img {
+  display: block;
+  margin: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}

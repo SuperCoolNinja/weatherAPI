@@ -1,4 +1,5 @@
 import { API_KEY_WEATHER, API_KEY_CITY } from "./config.local.ts"; // --> to be : config.js
+import { WeatherForecast, GeolocationData } from "./interface.ts";
 import { fetchData } from "./cache.js";
 
 // Change the background color depending on the time from city :
@@ -35,19 +36,19 @@ div.id = "wrapper_weather";
 document.body.append(div);
 
 // create a list/replace the list to show the cards :
-const createNewListItem = (): void => {
+const createNewListItem = () => {
   if (list) {
     list.remove();
   }
 
-  list = document.createElement("ul");
+  list = document.createElement("ul") as HTMLElement;
   list.id = "wrapper_item";
   div.appendChild(list);
 };
 
 // Find the first forecast for this day
-const findWeather = (date: Date, forecasts: any) => {
-  const forecast = forecasts.find((f: any) => {
+const findWeather = (date: Date, forecasts: WeatherForecast[]) => {
+  const forecast = forecasts.find((f: WeatherForecast) => {
     const fdate = new Date(f.dt_txt);
     fdate.setHours(0, 0, 0, 0);
     return fdate.getTime() === date.getTime();
@@ -65,7 +66,7 @@ const getTheActualTime = () => {
 
 // used to assign an icon to represent the actual weather :
 const assignWeatherIcon = (
-  weatherDescription: any,
+  weatherDescription: string,
   cloudsPercentage: number
 ) => {
   if (weatherDescription.includes("clear")) {
@@ -81,7 +82,7 @@ const assignWeatherIcon = (
 };
 
 // Show all the Cards Weather :
-const showCardsWeather = (dayOfWeek: string, forecast: any) => {
+const showCardsWeather = (dayOfWeek: string, forecast: WeatherForecast) => {
   const temperature = forecast.main.temp;
   const d_description = forecast.weather[0].description;
   const d_cloudsPercentage = forecast.clouds.all;
@@ -109,7 +110,11 @@ const showCardsWeather = (dayOfWeek: string, forecast: any) => {
 };
 
 // Iterate into each days and show :
-const iterateDays = (forecasts: any, today: Date, daysLenght: number) => {
+const iterateDays = (
+  forecasts: WeatherForecast[],
+  today: Date,
+  daysLenght: number
+) => {
   for (let i = 0; i < daysLenght; i++) {
     // calculate a day 24 hours :
     const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
@@ -132,7 +137,7 @@ const iterateDays = (forecasts: any, today: Date, daysLenght: number) => {
 };
 
 // Init WeatherDom
-const initWeatherDom = (forecasts: any) => {
+const initWeatherDom = (forecasts: WeatherForecast[]) => {
   const daysLenght = document.getElementById("days") as HTMLSelectElement;
   const today = getTheActualTime();
 
@@ -143,7 +148,7 @@ const initWeatherDom = (forecasts: any) => {
 // get the city from cache/api :
 const loadCity = async (city: string) => {
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${API_KEY_CITY}&language=fr&pretty=1`;
-  const data = await fetchData(url);
+  const data: GeolocationData = await fetchData(url);
   const lat = data.results[0].geometry.lat;
   const lon = data.results[0].geometry.lng;
   return { lat, lon };
@@ -153,7 +158,7 @@ const loadCity = async (city: string) => {
 const loadWeather = async (lat: number, lon: number) => {
   const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY_WEATHER}`;
   const data = await fetchData(url);
-  const forecasts = data.list;
+  const forecasts: WeatherForecast[] = data.list;
   initWeatherDom(forecasts);
 };
 

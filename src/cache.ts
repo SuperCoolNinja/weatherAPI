@@ -1,9 +1,11 @@
-const cache = {};
+import { Cache } from "./type.ts";
+
+const cache: Cache = {};
 
 // If it found the data into the cache then we use it else we set it to null
 const getCachedData = (key: string) => {
-  if (cache[key as keyof Object]) {
-    return Promise.resolve(cache[key as keyof Object]);
+  if (cache[key]) {
+    return Promise.resolve(cache[key]);
   }
 
   return Promise.resolve(null);
@@ -11,7 +13,7 @@ const getCachedData = (key: string) => {
 
 // Cache the data :
 const cacheData = (key: string, data: any) => {
-  cache[key as keyof Object] = data;
+  cache[key] = data;
 };
 
 // We get the url from the cache if it exist else from the api then we cache it :
